@@ -10,4 +10,4 @@ import { TodoList } from './entities/todo_list.entity';
   providers: [TodoListsService],
   exports: [TodoListsService],
 })
-export class TodoListsModule { }
+export class TodoListsModule {}

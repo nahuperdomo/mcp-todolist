@@ -14,7 +14,7 @@ import { McpModule } from './mcp/mcp.module';
     }),
     TodoListsModule,
     TodoItemsModule,
-    McpModule
+    McpModule,
   ],
 })
-export class AppModule { }
+export class AppModule {}

@@ -1,10 +1,11 @@
 🚀 Instrucciones de ejecución paso a paso
 
 ⚠️ Requisitos:
+
 - Node.js ≥ 18
 - npm
 
-> ℹ️ Esta app utiliza SQLite como base de datos por defecto. 
+> ℹ️ Esta app utiliza SQLite como base de datos por defecto.
 > No requiere archivos .env ni configuración externa. Simplemente instalá y ejecutá.
 
 ---
@@ -27,15 +28,14 @@
 
    REST Endpoints:
 
-   - POST    /api/todolists/:listId/items        ← Crear ítem
-   - PUT     /api/todoitems/:itemId               ← Actualizar ítem
-   - PATCH   /api/todoitems/:itemId/complete      ← Completar ítem
-   - DELETE  /api/todoitems/:itemId               ← Eliminar ítem
+   - POST /api/todolists/:listId/items ← Crear ítem
+   - PUT /api/todoitems/:itemId ← Actualizar ítem
+   - PATCH /api/todoitems/:itemId/complete ← Completar ítem
+   - DELETE /api/todoitems/:itemId ← Eliminar ítem
 
    MCP Tools:
 
-   - GET     /mcp/tools                           ← Ver tools disponibles
-   - POST    /mcp/invoke                          ← Ejecutar tool
+   - GET /mcp/tools ← Ver tools disponibles
+   - POST /mcp/invoke ← Ejecutar tool
 
 ---
-

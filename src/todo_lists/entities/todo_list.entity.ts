@@ -3,12 +3,12 @@ import { TodoItem } from '../../todo_items/entities/todo_item.entity';
 
 @Entity()
 export class TodoList {
-    @PrimaryGeneratedColumn()
-    id: number;
+  @PrimaryGeneratedColumn()
+  id: number;
 
-    @Column()
-    name: string;
+  @Column()
+  name: string;
 
-    @OneToMany(() => TodoItem, item => item.list, { cascade: true })
-    items: TodoItem[];
+  @OneToMany(() => TodoItem, (item) => item.list, { cascade: true })
+  items: TodoItem[];
 }

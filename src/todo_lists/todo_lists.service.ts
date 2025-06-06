@@ -10,7 +10,7 @@ export class TodoListsService {
   constructor(
     @InjectRepository(TodoList)
     private readonly todoListsRepository: Repository<TodoList>,
-  ) { }
+  ) {}
 
   async all(): Promise<TodoList[]> {
     return this.todoListsRepository.find({ relations: ['items'] });

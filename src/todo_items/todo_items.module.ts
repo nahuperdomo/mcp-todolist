@@ -6,9 +6,9 @@ import { TodoItem } from './entities/todo_item.entity';
 import { TodoList } from '../todo_lists/entities/todo_list.entity';
 
 @Module({
-    imports: [TypeOrmModule.forFeature([TodoItem, TodoList])],
-    controllers: [TodoItemsController],
-    providers: [TodoItemsService],
-    exports: [TodoItemsService] // <-- Esto es importante
+  imports: [TypeOrmModule.forFeature([TodoItem, TodoList])],
+  controllers: [TodoItemsController],
+  providers: [TodoItemsService],
+  exports: [TodoItemsService], // <-- Esto es importante
 })
-export class TodoItemsModule { }
+export class TodoItemsModule {}
