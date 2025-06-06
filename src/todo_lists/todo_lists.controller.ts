@@ -15,7 +15,7 @@ import { TodoList } from './entities/todo_list.entity';
 
 @Controller('api/todolists')
 export class TodoListsController {
-  constructor(private readonly todoListsService: TodoListsService) { }
+  constructor(private readonly todoListsService: TodoListsService) {}
 
   @Get()
   async all(): Promise<TodoList[]> {
