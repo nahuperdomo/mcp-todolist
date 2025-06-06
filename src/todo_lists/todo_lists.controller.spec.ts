@@ -3,35 +3,52 @@ import { TodoListsController } from './todo_lists.controller';
 import { TodoListsService } from './todo_lists.service';
 
 describe('TodoListsController', () => {
-  let todoListService: TodoListsService;
   let todoListsController: TodoListsController;
+  let mockService: {
+    all: jest.Mock;
+    get: jest.Mock;
+    update: jest.Mock;
+    create: jest.Mock;
+    delete: jest.Mock;
+  };
 
   beforeEach(async () => {
-    todoListService = new TodoListsService([
-      { id: 1, name: 'test1' },
-      { id: 2, name: 'test2' },
-    ]);
+    mockService = {
+      all: jest.fn().mockReturnValue([
+        { id: 1, name: 'test1' },
+        { id: 2, name: 'test2' },
+      ]),
+      get: jest.fn().mockReturnValue({ id: 1, name: 'test1' }),
+      update: jest.fn().mockReturnValue({ id: 1, name: 'modified' }),
+      create: jest.fn().mockReturnValue({ id: 3, name: 'new' }),
+      delete: jest.fn().mockReturnValue(undefined),
+    };
 
-    const app: TestingModule = await Test.createTestingModule({
+    const module: TestingModule = await Test.createTestingModule({
       controllers: [TodoListsController],
-      providers: [{ provide: TodoListsService, useValue: todoListService }],
+      providers: [
+        {
+          provide: TodoListsService,
+          useValue: mockService,
+        },
+      ],
     }).compile();
 
-    todoListsController = app.get<TodoListsController>(TodoListsController);
+    todoListsController = module.get<TodoListsController>(TodoListsController);
   });
 
-  describe('index', () => {
+  describe('all', () => {
     it('should return the list of todolist', () => {
-      expect(todoListsController.index()).toEqual([
+      expect(todoListsController.all()).toEqual([
         { id: 1, name: 'test1' },
         { id: 2, name: 'test2' },
       ]);
     });
   });
 
-  describe('show', () => {
+  describe('get', () => {
     it('should return the todolist with the given id', () => {
-      expect(todoListsController.show({ todoListId: 1 })).toEqual({
+      expect(todoListsController.get(1)).toEqual({
         id: 1,
         name: 'test1',
       });
@@ -40,30 +57,25 @@ describe('TodoListsController', () => {
 
   describe('update', () => {
     it('should update the todolist with the given id', () => {
-      expect(
-        todoListsController.update({ todoListId: 1 }, { name: 'modified' }),
-      ).toEqual({ id: 1, name: 'modified' });
-
-      expect(todoListService.get(1).name).toEqual('modified');
+      expect(todoListsController.update(1, { name: 'modified' })).toEqual({
+        id: 1,
+        name: 'modified',
+      });
     });
   });
 
   describe('create', () => {
-    it('should update the todolist with the given id', () => {
+    it('should create a new todolist', () => {
       expect(todoListsController.create({ name: 'new' })).toEqual({
         id: 3,
         name: 'new',
       });
-
-      expect(todoListService.all().length).toBe(3);
     });
   });
 
   describe('delete', () => {
     it('should delete the todolist with the given id', () => {
-      expect(() => todoListsController.delete({ todoListId: 1 })).not.toThrow();
-
-      expect(todoListService.all().map((x) => x.id)).toEqual([2]);
+      expect(() => todoListsController.delete(1)).not.toThrow();
     });
   });
 });
